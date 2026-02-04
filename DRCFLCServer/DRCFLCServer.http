@@ -1,0 +1,6 @@
+@DRCFLCServer_HostAddress = http://localhost:5213
+
+GET {{DRCFLCServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
