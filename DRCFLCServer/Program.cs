@@ -16,7 +16,11 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-
+if (!Directory.Exists("AudioFiles"))
+{
+    Directory.CreateDirectory("AudioFiles");
+    Environment.Exit(-1);
+}
 
 app.UseHttpsRedirection();
 
@@ -25,6 +29,10 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.MapGet("/audio/{name}",async (string name) => {
+    if (!Directory.Exists("AudioFiles")) {
+        Directory.CreateDirectory("AudioFiles");
+        Environment.Exit(-1);
+    }
     var file = Path.Combine("AudioFiles", name);
 
     if (!File.Exists(file)) {
@@ -46,6 +54,8 @@ app.MapGet("/list", () => {
 app.MapGet("/version", () => {
     return Results.Ok("MoonRise V 0.1");
 });
+
+app.MapGet("/alive", () => { return Results.Ok("Live"); });
 
 app.Run();
 
