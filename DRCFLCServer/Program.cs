@@ -31,6 +31,7 @@ app.MapControllers();
 app.MapGet("/audio/{name}",async (string name) => {
     if (!Directory.Exists("AudioFiles")) {
         Directory.CreateDirectory("AudioFiles");
+        Console.WriteLine("Create Directory AudioFiles /n Please Replace files flac to this folder"); 
         Environment.Exit(-1);
     }
     var file = Path.Combine("AudioFiles", name);
